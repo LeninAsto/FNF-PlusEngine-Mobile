@@ -2,7 +2,12 @@
 
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
-## Customization:
+## Customization and build on Android:
+
+### To compile on Android, you must have or install:
+* Android Studio (download sdk android 4.4.4 kitkat)
+* ndk r21e
+* jdk 17
 
 If you wish to disable things like *Lua Scripts* or *Video Cutscenes*, you can refer to the `Project.xml` file.
 
