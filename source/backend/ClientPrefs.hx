@@ -37,6 +37,12 @@ import states.TitleState;
 	public var framerate:Int = 60;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
+	public var judgementCounter:Bool = true;
+	public var comboInGame:Bool = false;
+	public var useFreakyFont:Bool = false;
+	public var showStateInFPS:Bool = true;
+	public var showEndCountdown:Bool = false; // Activa/desactiva la cuenta regresiva
+    public var endCountdownSeconds:Int = 10;  // Segundos de cuenta regresiva (10-30)
 	public var noteOffset:Int = 0;
 	public var arrowRGB:Array<Array<FlxColor>> = [
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
@@ -82,6 +88,7 @@ import states.TitleState;
 
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public var ratingOffset:Int = 0;
+	public var epicWindow:Float = 20.0;
 	public var sickWindow:Float = 45.0;
 	public var goodWindow:Float = 90.0;
 	public var badWindow:Float = 135.0;
@@ -90,11 +97,14 @@ import states.TitleState;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
 	public var language:String = 'en-US';
+	public var abbreviateScore:Bool = true;
 }
 
 class ClientPrefs {
 	public static var data:SaveVariables = {};
 	public static var defaultData:SaveVariables = {};
+	public static var judgementCounter:Bool = true;
+	
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -196,6 +206,10 @@ class ClientPrefs {
 		#if ACHIEVEMENTS_ALLOWED Achievements.save(); #end
 		FlxG.save.flush();
 
+        //Wow counter =p
+        Reflect.setField(FlxG.save.data, "judgementCounter", judgementCounter);
+		data.judgementCounter = judgementCounter;
+
 		//Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v3', CoolUtil.getSavePath());
@@ -224,6 +238,10 @@ class ClientPrefs {
 			data.framerate = Std.int(FlxMath.bound(refreshRate, 60, 240));
 		}
 		#end
+
+		if (Reflect.hasField(FlxG.save.data, "judgementCounter"))
+            judgementCounter = !!Reflect.field(FlxG.save.data, "judgementCounter");
+		    judgementCounter = data.judgementCounter;
 
 		if (data.fpsRework)
 			FlxG.stage.window.frameRate = data.framerate;

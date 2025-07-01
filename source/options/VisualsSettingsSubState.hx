@@ -110,6 +110,22 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option(
+			'Abbreviate Score',
+			'If enabled, the score will be abbreviated (e.g. 10.00K, 1.00M).',
+			'abbreviateScore',
+			BOOL
+		);
+		addOption(option);
+
+		var option:Option = new Option(
+			'Use Freaky Font',
+			'Enable to use the freaky.ttf font instead of vcr.ttf.',
+			'useFreakyFont',
+			BOOL
+		);
+		addOption(option);
+
 		var option:Option = new Option('Health Bar Opacity',
 			'How much transparent should the health bar and icons be.',
 			'healthBarAlpha',
@@ -166,6 +182,27 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			'comboStacking',
 			BOOL);
 		addOption(option);
+
+		var option:Option = new Option(
+            'Show current state',
+            'If enabled, the FPS counter will show the current State.',
+            'showStateInFPS',
+            BOOL);
+        addOption(option);
+
+		var option:Option = new Option(
+            'Combo and Rating in camGame',
+            'If enabled, Combo and Ratings will be rendered in the camGame layer instead of camHUD.',
+            'comboInGame',
+            BOOL
+        );
+        addOption(option);
+        option.onChange = function() {
+            // Cambia la cámara en tiempo real si el usuario cambia la opción desde el menú
+            if (PlayState.instance != null && PlayState.instance.comboGroup != null) {
+                PlayState.instance.comboGroup.cameras = [ClientPrefs.data.comboInGame ? PlayState.instance.camGame : PlayState.instance.camHUD];
+            }
+        };
 
 		super();
 		add(notes);

@@ -1,6 +1,7 @@
 package objects;
 
 import flixel.addons.display.FlxPieDial;
+import psychlua.LuaUtils;
 
 #if hxvlc
 import hxvlc.flixel.FlxVideoSprite;
@@ -22,12 +23,17 @@ class VideoSprite extends FlxSpriteGroup {
 
 	public var waiting:Bool = false;
 
-	public function new(videoName:String, isWaiting:Bool, canSkip:Bool = false, shouldLoop:Dynamic = false) {
+	public function new(videoName:String, isWaiting:Bool, canSkip:Bool = false, shouldLoop:Dynamic = false, camera:String = "other") {
 		super();
 
 		this.videoName = videoName;
 		scrollFactor.set();
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		switch(camera.toLowerCase()) {
+            case "hud": cameras = [FlxG.cameras.list[1]]; // camHUD normalmente es la segunda
+            case "game": cameras = [FlxG.cameras.list[0]]; // camGame normalmente es la primera
+            case "other": cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]]; // camOther suele ser la última
+            default: cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+        }
 
 		waiting = isWaiting;
 		if(!waiting)
@@ -166,5 +172,15 @@ class VideoSprite extends FlxSpriteGroup {
 	public function play() videoSprite?.play();
 	public function resume() videoSprite?.resume();
 	public function pause() videoSprite?.pause();
+	
+	function onGamePaused()
+    {
+        pause();
+    }
+
+    function onGameResumed()
+    {
+        resume();
+    }
 	#end
 }

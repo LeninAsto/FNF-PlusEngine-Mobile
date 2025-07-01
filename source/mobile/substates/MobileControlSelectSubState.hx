@@ -98,7 +98,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 		add(rightArrow);
 
 		positionText = new FlxText(0, FlxG.height, FlxG.width / 4, '');
-		positionText.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, FlxTextAlign.LEFT);
+		positionText.setFormat(Paths.defaultFont(), 18, FlxColor.WHITE, FlxTextAlign.LEFT);
 		positionText.visible = false;
 
 		positionTextBg = FlxGradient.createGradientFlxSprite(250, 150, [FlxColor.BLACK, FlxColor.BLACK, FlxColor.BLACK, FlxColor.TRANSPARENT], 1, 360);
@@ -116,7 +116,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 			if (options[curOption] == 'Pad-Extra')
 			{
 				var nuhuh = new FlxText(0, 0, FlxG.width / 2, Language.getPhrase('pad-extra_save', 'Pad-Extra Is Just A Binding Option\nPlease Select A Different Option To Exit.'));
-				nuhuh.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, FlxTextAlign.CENTER);
+				nuhuh.setFormat(Paths.defaultFont(), 32, FlxColor.WHITE, FlxTextAlign.CENTER);
 				nuhuh.screenCenter();
 				nuhuh.cameras = [ui];
 				add(nuhuh);

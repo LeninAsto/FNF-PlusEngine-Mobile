@@ -8,9 +8,11 @@ import backend.Song;
 import openfl.Lib;
 import openfl.utils.Assets;
 import openfl.display.BitmapData;
+import openfl.display.StageDisplayState;
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.FlxState;
+import sys.io.Process;
 
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
@@ -85,7 +87,8 @@ class FunkinLua {
 		set('Function_Continue', LuaUtils.Function_Continue);
 		set('luaDebugMode', false);
 		set('luaDeprecatedWarnings', true);
-		set('version', MainMenuState.psychEngineVersion.trim());
+		set('PsychVersion', MainMenuState.psychEngineVersion.trim());
+		set('PlusVersion', MainMenuState.plusEngineVersion.trim());
 		set('modFolder', this.modFolder);
 
 		// Song/Week shit
@@ -1280,7 +1283,7 @@ class FunkinLua {
 			}
 			return false;
 		});
-		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?canSkip:Bool = true, ?forMidSong:Bool = false, ?shouldLoop:Bool = false, ?playOnLoad:Bool = true) {
+			Lua_helper.add_callback(lua, "startVideo", function(videoFile:String, ?forMidSong:Bool = false, ?canSkip:Bool = true, ?shouldLoop:Bool = false, ?playOnLoad:Bool = true, ?camera:String = "other") {
 			#if VIDEOS_ALLOWED
 			if(FileSystem.exists(Paths.video(videoFile)))
 			{
@@ -1289,7 +1292,7 @@ class FunkinLua {
 					game.remove(game.videoCutscene);
 					game.videoCutscene.destroy();
 				}
-				game.videoCutscene = game.startVideo(videoFile, forMidSong, canSkip, shouldLoop, playOnLoad);
+				game.videoCutscene = game.startVideo(videoFile, forMidSong, canSkip, shouldLoop, playOnLoad, camera);
 				return true;
 			}
 			else

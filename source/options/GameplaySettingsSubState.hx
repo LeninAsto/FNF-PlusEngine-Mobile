@@ -77,13 +77,24 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeHitsoundVolume;
 
 		var option:Option = new Option('Rating Offset',
-			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
+			'Changes how late/early you have to hit for a "Epic!!"\nHigher values mean you have to hit later.',
 			'ratingOffset',
 			INT);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 20;
 		option.minValue = -30;
 		option.maxValue = 30;
+		addOption(option);
+
+		var option:Option = new Option('Epic!! Hit Window',
+			'Changes the amount of time you have\nfor hitting a "Epic!!" in milliseconds.',
+			'epicWindow',
+			FLOAT);
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 5;
+		option.minValue = 15.0;
+		option.maxValue = 25.0;
+		option.changeValue = 0.1;
 		addOption(option);
 
 		var option:Option = new Option('Sick! Hit Window',
@@ -127,6 +138,31 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.minValue = 2;
 		option.maxValue = 10;
 		option.changeValue = 0.1;
+		addOption(option);
+
+        var option:Option = new Option('Judgement Counter',
+            'Show the judgement counter during gameplay.',
+            'judgementCounter',
+            BOOL);
+        addOption(option);
+
+        var option:Option = new Option('Show End Countdown',
+            'If checked, shows a countdown in the last seconds of the song.',
+            'showEndCountdown',
+            BOOL);
+        addOption(option);
+
+        var option:Option = new Option('End Countdown Seconds',
+            'How many seconds before the song ends the countdown appears (10-30).',
+            'endCountdownSeconds',
+            INT);
+        option.displayFormat = '%vs';
+        option.scrollSpeed = 1;
+        option.minValue = 10;
+        option.maxValue = 30;
+        option.changeValue = 1;
+        option.decimals = 0;
+        option.showCondition = function() return ClientPrefs.data.showEndCountdown;
 		addOption(option);
 
 		super();

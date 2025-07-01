@@ -1,3 +1,31 @@
+# 🎮 FNF-PlusEngine
+Welcome to FNF-PlusEngine! This is a modified version of Friday Night Funkin', based on Psych Engine Mobile Porting, with added features and improvements for a more dynamic and customizable gameplay experience adding advanced modcharts variables so you can create your craziest modcharts, and more.
+
+
+
+### Features
+- Video in HUD: Now you can play videos directly on camHUD or camGame. Perfect for custom cutscenes or visual effects. More info here.
+- New Lua Variables: Added custom variables like setFullscreen, winTweenSize, winTweenX, and winTweenY for advanced window control.
+- Cool Font.
+- Judgement Counter.
+- Advanced Variables for craziest Modcharts.
+- Fix select json in Charting Editor.
+- New results State and really cool.
+- and More...
+
+### 🤝 Contributions
+- **[Funkin Modchart](https://github.com/TheoDevelops/FunkinModchart) - Developed by TheoDev**
+- Contributions are welcome! If you have ideas, improvements, or fixes, feel free to fork the repo and open a pull request.
+
+**Thanks for checking out FNF-PlusEngine! If you enjoy the project, leave a ⭐ and share it with other FNF fans.**
+
+> This project is subject to bugs, fixes, improvements and changes.
+
+To learn about new Lua scripts, click [here](https://github.com/LeninAsto/FNF-PlusEngine/blob/main/docs/scripts/TemplatePlusScript.lua).
+To learn about new Advances variables for Modcharts, clic [here](https://github.com/LeninAsto/FNF-PlusEngine/blob/main/docs/scripts/TemplateAdvancedModchartScript.md)
+
+# Psych Team
+
 ## Customization and build on Android:
 
 ### To compile on Android, you must have or install:
